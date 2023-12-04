@@ -1,0 +1,13 @@
+curl -v -X POST localhost:5000/addWork -H "Content-Type: application/json" -d '{"workload_type":"ADD", "body": {"int1": 1, "int2": 3}}'
+
+curl -v -X POST localhost:5000/addWork -H "Content-Type: application/json" -d '{"workload_type":"SUBTRACT", "body": {"int1": 7, "int2": 5}}'
+
+curl -v -X POST localhost:5000/addWork -H "Content-Type: application/json" -d '{"workload_type":"PRINT_STRING", "body": {"to_print": "awesome string!"}}'
+
+curl -v -X POST localhost:5000/addWork -H "Content-Type: application/json" -d '{"workload_type":"SHELL", "body": {"to_execute": "touch foo"}}'
+
+this next one tests that jobs timeout after 1 second
+curl -v -X POST localhost:5000/addWork -H "Content-Type: application/json" -d '{"workload_type":"SHELL", "body": {"to_execute": "sleep 2"}}'
+
+this next one intentionally hits a runtime error
+curl -v -X POST localhost:5000/addWork -H "Content-Type: application/json" -d '{"workload_type":"ERROR"}'
